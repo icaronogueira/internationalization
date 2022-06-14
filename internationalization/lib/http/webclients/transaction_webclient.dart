@@ -7,7 +7,7 @@ import 'package:http/http.dart';
 class TransactionWebClient {
   Future<List<Transaction>> findAll() async {
     final Response response =
-        await client.get(baseUrl);
+        await client.get(Uri.base);
     final List<dynamic> decodedJson = jsonDecode(response.body);
     return decodedJson
         .map((dynamic json) => Transaction.fromJson(json))
@@ -19,7 +19,7 @@ class TransactionWebClient {
 
     await Future.delayed(Duration(seconds: 2));
 
-    final Response response = await client.post(baseUrl,
+    final Response response = await client.post(Uri.base,
         headers: {
           'Content-type': 'application/json',
           'password': password,
